@@ -1,5 +1,5 @@
 # favicon_generator
-Generate favicons from SVG image file
+Generate favicon from SVG image file, and all other images and app.manifest for a web app.
 
 
 ```bash
