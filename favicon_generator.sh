@@ -48,16 +48,19 @@ SIZES="180x180 192x192 256x256 512x512"
 # Loop through the icon sizes and create the corresponding PNG files
 for SIZE in $SIZES
 do
+    width=$(echo $SIZE | cut -d"x" -f1)
+    height=$(echo $SIZE | cut -d"x" -f2)
     inkscape "$INPUT_SVG_FILE" \
-      --export-png="$ICONS_FOLDER/logo_$SIZE.png" \
-      --export-width=$SIZE \
-      --export-height=$SIZE \
+      --export-type=png \
+      --export-filename="$ICONS_FOLDER/logo_$SIZE.png" \
+      --export-width=$width \
+      --export-height=$height \
       --export-background-opacity=0
 done
 
 # Create favicon.ico file to put in App root folder
 # https://imagemagick.org/script/convert.php
-convert "$ICONS_FOLDER/logo_256x256.png" -define icon:auto-resize=64,48,32,16 "favicon.ico"
+convert "$ICONS_FOLDER/logo_256*.png" -define icon:auto-resize=64,48,32,16 "favicon.ico"
 cp "favicon.ico" "$ICONS_FOLDER/favicon.ico"
 
 
